@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        width: 320px;
+        padding: 15px;
+        font-family: sans-serif;
+        background: #f8f9fa;
+      }
+      .stats {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+      }
+      .stat-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+      input {
+        width: 93%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: none;
+        font-weight: bold;
+      }
+      #startBtn {
+        background: #28a745;
+        color: white;
+      }
+      #pauseBtn {
+        background: #ffc107;
+        color: black;
+      }
+      #skipBtn {
+        background: #17a2b8;
+        color: white;
+      }
+      #downloadBtn {
+        background: #007bff;
+        color: white;
+      }
+      #clearBtn {
+        background: #dc3545;
+        color: white;
+      }
+      #resetBtn {
+        background: #6c757d;
+        color: white;
+      }
+      .status {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>🇩🇪 Tupalo Scraper Matrix</h3>
+    <div class="stats">
+      <div class="stat-row"><span>City (URL part):</span></div>
+      <input type="text" id="cityInput" placeholder="e.g. berlin" />
+      <div class="stat-row">
+        <span>Category:</span><span id="currentCategory">None</span>
+      </div>
+      <div class="stat-row"><span>Records:</span><span id="count">0</span></div>
+      <div class="stat-row"><span>Page:</span><span id="pageIdx">1</span></div>
+      <div class="stat-row">
+        <span>Rate limit:</span><span id="rateLimit">—</span>
+      </div>
+    </div>
+    <button id="startBtn">START SCRAPE</button>
+    <button id="pauseBtn">PAUSE</button>
+    <button id="skipBtn">SKIP CATEGORY</button>
+    <button id="downloadBtn">DOWNLOAD EXCEL</button>
+    <button id="clearBtn">CLEAR DATA</button>
+    <button id="resetBtn">RESET ALL PROGRESS</button>
+    <div id="status" class="status">IDLE</div>
+    <script src="xlsx.full.min.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
