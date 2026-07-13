@@ -53,7 +53,7 @@
   async function scrapeListPage() {
     const result = await waitForElementOrBlock(
       ".ais-Highlight, a.link[data-client-handler]",
-      15000, // FINITE timeout — this is the main fix for the infinite hang
+      15000,
     );
 
     if (result === "blocked") {
@@ -64,7 +64,6 @@
       if (isRateLimited()) {
         chrome.runtime.sendMessage({ type: "RATE_LIMIT_HIT" });
       } else {
-        // Genuinely empty/slow page — report empty so background advances
         chrome.runtime.sendMessage({
           type: "LIST_LINKS_READY",
           links: [],
@@ -74,7 +73,6 @@
       return;
     }
 
-    // result === "found": let the list settle, then extract
     await new Promise((r) => setTimeout(r, 1200));
 
     if (isRateLimited()) {
@@ -82,12 +80,19 @@
       return;
     }
 
+    // FIX: Using :not(.tupalo-blue) targets only the clean business listings
     const links = Array.from(
-      document.querySelectorAll('a.link[data-client-handler="false"]'),
+      document.querySelectorAll(
+        'a.link[data-client-handler="false"]:not(.tupalo-blue)',
+      ),
     )
       .map((a) => a.href)
       .filter(
-        (href) => href && !href.includes("/c/") && !href.includes("?page="),
+        (href) =>
+          href &&
+          !href.includes("/c/") &&
+          !href.includes("?page=") &&
+          !href.includes("/t/"), // Extra safety: blocks tag paths entirely
       );
 
     let totalPages = 1;
