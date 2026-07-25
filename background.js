@@ -17,8 +17,7 @@ const CATEGORIES = [
   "freizeit",
 ];
 
-// ---- Tunables ----
-const MAX_CONCURRENT_TABS = 5; // was 15 — the main reason you got blocked so fast
+const MAX_CONCURRENT_TABS = 15; // was 15 — the main reason you got blocked so fast
 const TAB_STAGGER_MS = 350; // small gap between opening tabs
 const BASE_BACKOFF_MS = 20000; // block lasts ~15s, so 20s base
 const MAX_BACKOFF_MS = 120000;
@@ -26,7 +25,6 @@ const MAX_LINK_ATTEMPTS = 4;
 const MAX_LIST_ATTEMPTS = 5;
 const TAB_WATCHDOG_MS = 30000; // a tab that never reports gets force-recovered
 
-// ---- State ----
 let activeTabs = new Map(); // numeric tabId -> { url }
 let tabWatchdogs = new Map(); // numeric tabId -> timeoutId
 let listTabId = null;
